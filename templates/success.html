@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Successful</title>
+</head>
+<body>
+    <h1>Registration Successful!</h1>
+    <p>Your User ID: {{ user_id }}</p>
+    <p>Download your QR Code: <a href="/qr/{{ user_id }}">Click Here</a></p>
+    <p>QR Path: {{ qr_path }}</p>
+    {% if medical_report_path %}
+        <p>Download Medical Report: <a href="/medical_report/{{ user_id }}">Click Here</a></p>
+    {% endif %}
+    <a href="/">Go Back</a>
+</body>
+</html>

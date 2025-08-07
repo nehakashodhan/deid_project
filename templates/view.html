@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <p>ID: {{ user[0] }}</p>
+    <p>Name: {{ user[1] }}</p>
+    <p>DOB: {{ user[2] }}</p>
+    <p>Allergies: {{ user[3] }}</p>
+    <p>Emergency Contact: {{ user[4] }}</p>
+    <p>Blood Group: {{ user[5] }}</p>
+    {% if user[6] %}
+        <p>Medical Report: <a href="/medical_report/{{ user[0] }}">Download</a></p>
+    {% else %}
+        <p>Medical Report: Not uploaded</p>
+    {% endif %}
+    <a href="/">Go Back</a>
+</body>
+</html>

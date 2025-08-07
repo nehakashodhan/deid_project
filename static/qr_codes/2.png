@@ -1,0 +1,31 @@
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        name = request.form['name']
+        dob = request.form['dob']
+        allergies = request.form['allergies']
+        emergency_contact = request.form['emergency_contact']
+        
+        conn = sqlite3.connect('deid.db')
+        c = conn.cursor()
+        c.execute('''INSERT INTO users (name, dob, allergies, emergency_contact)
+                     VALUES (?, ?, ?, ?)''', (name, dob, allergies, emergency_contact))
+        conn.commit()
+        user_id = c.lastrowid  # This will be 2 for the second user
+        conn.close()
+        
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr_data = f"http://127.0.0.1:5000/profile/{user_id}"  # e.g., http://127.0.0.1:5000/profile/2
+        qr.add_data(qr_data)
+        qr.make(fit=True)
+        qr_img = qr.make_image(fill='black', back_color='white')
+        qr_path = f"static/qr_codes/{user_id}.png"  # e.g., 2.png
+        os.makedirs('static/qr_codes', exist_ok=True)
+        qr_img.save(qr_path)
+        
+        with open('static/qr_codes/qr_codes.txt', 'a') as f:
+            f.write(f"User ID: {user_id}, QR Path: {qr_path}, Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
+        
+        return render_template('success.html', user_id=user_id, qr_path=qr_path)
+    
+    return render_template('index.html')

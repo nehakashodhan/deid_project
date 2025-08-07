@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Emergency ID</title>
+</head>
+<body>
+    <h1>Register Your Emergency ID</h1>
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name"><br><br>
+        
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required><br><br>
+        
+        <label for="allergies">Allergies (comma-separated):</label>
+        <textarea id="allergies" name="allergies" placeholder="e.g., Peanut Allergy, Pollen Allergy"></textarea><br><br>
+        
+        <label for="emergency_contact">Emergency Contact:</label>
+        <input type="text" id="emergency_contact" name="emergency_contact" required placeholder="e.g., Name, +91-9876543210"><br><br>
+        
+        <label for="blood_group">Blood Group:</label>
+        <input type="text" id="blood_group" name="blood_group" required placeholder="e.g., A+, O-"><br><br>
+        
+        <label for="medical_report">Upload Medical Report (PDF):</label>
+        <input type="file" id="medical_report" name="medical_report" accept=".pdf"><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
